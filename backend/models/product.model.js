@@ -4,20 +4,20 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
     name: {
         type: String,
-        requied: [true, "please enter product name"]
+        required: [true, "please enter product name"]
     },
     description: {
         type: String,
-        requied: [true, "please enter product description"]
+        required: [true, "please enter product description"]
     },
     price: {
         type: Number,
-        requied: [true, "please enter product price"],
+        required: [true, "please enter product price"],
         maxLength: [8, "price cannot exceed 8 characters"]
     },
     category: {
         type: String,
-        require: [true, "please enter product category"]
+        required: [true, "please enter product category"]
     },
     rating: {
         type: Number,
@@ -27,11 +27,11 @@ const productSchema = new Schema({
         {
             public_id: {
                 type: String,
-                requied: true
+                required: true
             },
             url: {
                 type: String,
-                requied: true
+                required: true
             }
         }
     ],

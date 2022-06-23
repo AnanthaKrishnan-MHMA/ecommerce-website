@@ -1,70 +1,64 @@
 const Product = require('../models/product.model');
+const ErrorHandler = require('../utils/errorHandler');
+const catchAsyncError = require('../middleware/catchAsyncError');
 
 // show all products
-exports.createProduct = async (req, res) => {
+exports.createProduct = catchAsyncError(async (req, res) => {
 
     let newProduct = await Product.create(req.body);
     res.status(200).json({
         success: true,
         newProduct
     });
-}
+});
 
 // create new product
-exports.showAllProducts = async (req, res) => {
+exports.showAllProducts = catchAsyncError(async (req, res) => {
+    
     let allProducts = await Product.find();
     res.status(200).json({
         success: true,
         allProducts
     });
-}
+});
 
 // product details
-exports.showProduct = async (req, res) => {
+exports.showProduct = catchAsyncError(async (req, res, next) => {
 
     let product = await Product.findById(req.params.id);
     // checking for existance of product
     if (!product) {
-        return res.status(500).json({
-            success: false,
-            message: "product doesn't exist"
-        })
+        return next(new ErrorHandler("product not found", 404));
     }
 
     res.status(200).json({
         success: true,
         product
     });
-}
+});
 // update product 
-exports.updateProduct = async (req, res) => {
+exports.updateProduct = catchAsyncError(async (req, res, next) => {
 
     let product = await Product.findById(req.params.id);
     // checking for existance of product
     if (!product) {
-        return res.status(500).json({
-            success: false,
-            message: "product doesn't exist"
-        })
+        return next(new ErrorHandler("product not found", 404));
     }
 
-    let updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {new:true});
+    let updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.status(200).json({
         success: true,
         updatedProduct
     });
 
-}
+});
 // delete product 
-exports.deleteProduct = async (req, res) => {
+exports.deleteProduct = catchAsyncError(async (req, res, next) => {
 
     let product = await Product.findById(req.params.id);
     // checking for existance of product
     if (!product) {
-        return res.status(500).json({
-            success: false,
-            message: "product doesn't exist"
-        })
+        return next(new ErrorHandler("product not found", 404));
     }
 
     await product.remove();
@@ -73,4 +67,4 @@ exports.deleteProduct = async (req, res) => {
         message: "product deleted successfully"
     });
 
-}
+});
