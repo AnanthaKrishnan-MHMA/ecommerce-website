@@ -9,18 +9,13 @@ exports.createUser = catchAsyncError(
             email,
             password,
             avatar
-        })
+        });
+
+       const token = user.getJWTToken(user.id,process.env.JWT_TOKEN_SECRET)
         res.status(200).json({
             success:true,
+            token,
             user,
         })
     }
 ) 
-exports.createProduct = catchAsyncError(async (req, res) => {
-
-    let newProduct = await Product.create(req.body);
-    res.status(200).json({
-        success: true,
-        newProduct
-    });
-});
