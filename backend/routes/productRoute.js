@@ -8,7 +8,7 @@ const {
     showProduct,
     updateProduct,
     deleteProduct
-} = require('../controllers/controller');
+} = require('../controllers/productController');
 
 router.route('/products')
     .get(showAllProducts);
