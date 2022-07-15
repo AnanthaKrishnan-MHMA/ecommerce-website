@@ -24,7 +24,7 @@ const productSchema = new Schema({
         type: String,
         required: [true, "please enter product category"]
     },
-    rating: {
+    ratings: {
         type: Number,
         default: 0
     },
@@ -48,6 +48,11 @@ const productSchema = new Schema({
     },
     reviews:[
         {
+            user:{
+                type:Schema.Types.ObjectId,
+                ref:"User",
+                required:true,
+            },
             name:{
                 type:String,
                 required:true
@@ -62,10 +67,14 @@ const productSchema = new Schema({
             }
         }
     ],
+    numOfReviews:{
+        type:Number,
+        default:0
+    },
     created_at:{
         type:Date,
         default:Date.now
     }
 });
 
-module.exports = mongoose.model("Products",productSchema);
+module.exports = mongoose.model("Product",productSchema);
