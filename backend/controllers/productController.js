@@ -94,7 +94,7 @@ exports.addUserReview = catchAsyncError(async (req, res, next) => {
     if (!req.user) {
         return next(new ErrorHandler("login and try again", 404));
     }
-    let product = await Product.findById(req.params.id);
+    let product = await Product.findById(req.query.id);
     // checking for existance of product
     if (!product) {
         return next(new ErrorHandler("product not found", 404));
@@ -114,6 +114,7 @@ exports.addUserReview = catchAsyncError(async (req, res, next) => {
     }
     // calculating total ratings given by each user
     let totalRatings = 0;
+    // calculating average rating given by users
     product.reviews.forEach(rev => {
         totalRatings += rev.rating;
     });
@@ -123,4 +124,50 @@ exports.addUserReview = catchAsyncError(async (req, res, next) => {
         success: true,
         product
     });
+});
+// show all review of a product
+exports.showProductReviews = catchAsyncError(async (req, res, next) => {
+
+    let product = await Product.findById(req.query.id);
+    // checking for existance of product
+    if (!product) {
+        return next(new ErrorHandler("product not found", 404));
+    }
+
+    res.status(200).json({
+        success: true,
+        reviews: product.reviews
+    });
+
+});
+// delete review of a product
+exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
+
+    let product = await Product.findById(req.query.id);
+    // checking for existance of product
+    if (!product) {
+        return next(new ErrorHandler("product not found", 404));
+    }
+    // filtering review to be deleted from the array
+    const filtredReviews = product.reviews.filter(rev => rev.user.toString() !== req.user._id.toString());
+    const numOfReviews = filtredReviews.length;
+    let totalRatings = 0;
+    filtredReviews.forEach(rev => {
+        totalRatings += rev.rating;
+    });
+    const ratings = totalRatings / numOfReviews;
+    product = await Product.findByIdAndUpdate(req.query.id,{
+        reviews : filtredReviews,
+        ratings,
+        numOfReviews
+    },{
+        new:true,
+        runValidators:true,
+        useFindAndModify:false
+    });
+    res.status(200).json({
+        success: true,
+        product
+    });
+
 });
