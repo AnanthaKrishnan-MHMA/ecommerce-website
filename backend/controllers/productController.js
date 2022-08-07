@@ -1,5 +1,4 @@
 const Product = require('../models/product.model');
-const User = require('../models/user.model');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncError = require('../middleware/catchAsyncError');
 const ApiFeatures = require('../utils/apiFeatures');
@@ -167,7 +166,9 @@ exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
     });
     res.status(200).json({
         success: true,
+        message:"review deleted successfully",
         product
+
     });
 
 });
