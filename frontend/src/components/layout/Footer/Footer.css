@@ -1,58 +1,123 @@
-.footer{
-    margin-top: 0.2vmax;
+.footer {
+    margin-top: 4vmax;
     padding: 2vmax;
     background-color: rgb(34, 33, 33);
     color: white;
     display: flex;
     align-items: center;
 }
-.footer h1,h4{
+
+.footer h1,
+h4 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.footer img{
+
+.footer img {
     width: 10vmax;
     margin: 0;
     padding: 0;
     cursor: pointer;
 }
-.footer__left{
+
+.footer__left {
     width: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.footer__center{
+
+.footer__center {
     width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.footer__center p{
+
+.footer__center p {
     max-width: 60%;
     margin: 0.5vmax;
 }
-.footer__center h1{
+
+.footer__center h1 {
     font-size: 4vmax;
     color: crimson;
 }
-.footer__right{
+
+.footer__right {
     width: 15%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.footer__right h4{
+
+.footer__right h4 {
     font-size: 1.4vmax;
     text-decoration: underline;
 }
-.footer__right a{
+
+.footer__right a {
     text-decoration: none;
     font-size: 1.3vmax;
     margin: 0.5vmax;
     color: white;
-    transition:all 0.5s;
+    transition: all 0.5s;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.footer__right a:hover{
+
+.footer__right a:hover {
     color: crimson;
+}
+
+@media screen and (max-width:600px) {
+    .footer {
+        flex-direction: column;
+    }
+
+    .footer__left {
+        order: 1;
+    }
+
+    .footer__center {
+        order: 3;
+    }
+
+    .footer__right {
+        order: 2;
+    }
+
+    .footer__center p {
+        max-width: 90%;
+        margin: 0.5vmax;
+        font-size: 1vmax;
+    }
+
+    .footer img {
+        width: 20vmax;
+    }
+
+    .footer__left {
+        width: 90%;
+    }
+
+    .footer__left p {
+        font-size: 1.2vmax;
+    }
+
+    .footer__right {
+        width: 90%;
+        flex-direction: row;
+        justify-content: center;
+        margin: 2vmax;
+    }
+
+    .footer__right h4 {
+        font-size: 1.6vmax;
+        text-decoration: none;
+    }
+    .footer__right h4::after{
+        content: " on >>  ";
+    }
+    .footer__right a {
+        font-size: 1.4vmax;
+    }
 }

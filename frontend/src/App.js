@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import webFont from "webfontloader";
 function App() {
   useEffect(() => {
-    console.log("use effect running");
     webFont.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"]
