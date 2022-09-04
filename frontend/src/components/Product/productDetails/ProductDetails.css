@@ -1,0 +1,142 @@
+/* div {
+    border: 1px dotted red;
+} */
+
+.productDetails {
+    display: flex;
+    justify-content: center;
+    width: 100vmax;
+    max-width: 98%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 6vmax;
+    border-bottom: 1px solid rgba(97, 97, 97,0.3);;
+}
+
+.productDetails__left {
+    width: 35%;
+    border: 1px solid white;
+    padding: 2vmax;
+}
+
+.productDetails__right {
+    background: white;
+    width: 55%;
+    border: 1px solid white;
+    padding: 2vmax 4vmax;
+    border-left: 1px solid rgba(97, 97, 97,0.3);
+}
+
+.productDetails__right_block1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4vmax;
+}
+
+.productDetails__right_block1_1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.productDetails__right_block1_2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product_id {
+    font-size: 1.2vmax;
+}
+
+.productPrice {
+    color: crimson;
+    margin-top: 2vmax;
+}
+
+.productDetails__right_quantity {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 1vmax;
+    width: 12%;
+    border: 1px solid rgb(108, 108, 108)
+}
+
+.incDecBtn {
+    border-radius: 1vmax;
+    border: none;
+    background: rgb(78, 78, 78);
+    color: white;
+}
+
+.buyNowBtn {
+    min-height: 5vmax;
+    min-width: 10vmax;
+    color: white;
+    font: 800 2vmax "Roboto";
+    border-radius: 0.5vmax;
+    background: tomato;
+    border: white;
+    margin: 2vmax 0;
+    cursor: pointer;
+}
+
+
+
+
+.instock,
+.instock__hurry,
+.outofstock {
+    font-size: 1.1vmax;
+}
+
+.instock {
+    color: green;
+}
+
+.instock__hurry {
+    color: rgb(227, 227, 55);
+}
+
+.outofstock {
+    color: red;
+}
+
+@media screen and (max-width:600px){
+    .productDetails {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .productDetails__left {
+        width: 95%;
+    }
+    
+    .productDetails__right {
+        width: 95%;
+        border-left: none;
+        border-top: 1px solid rgba(97, 97, 97,0.3);
+        padding: 2vmax;
+
+    }
+    .productDetails__right_block1 {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .productDetails__right_block1_2 {
+        align-self: flex-start;
+        margin-top: 2vmax;
+    }
+    .productDetails__right_quantity {
+        width: 40%;
+        font-size: 3vmax;
+    }
+    .productDetails__right_quantity p{
+        margin: auto;
+    }
+    .incDecBtn {
+        height: 5vmax;
+        width: 5vmax;
+        font-size: 3vmax;
+    }
+    
+}

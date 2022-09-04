@@ -14,7 +14,6 @@ exports.createProduct = catchAsyncError(async (req, res) => {
         newProduct
     });
 });
-
 // create new product
 exports.showAllProducts = catchAsyncError(async (req, res) => {
 

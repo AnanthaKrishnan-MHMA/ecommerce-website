@@ -10,11 +10,11 @@ import { fetchProducts } from '../../redux/features/product.feature.js';
 
 function Home() {
     let dispatch = useDispatch();
-    let productState = useSelector((state) => state.products);
+    let productsState = useSelector((state) => state.products);
     useEffect(() => {
         dispatch(fetchProducts());
     }, [dispatch]);
-    let { products, loading, error } = productState;
+    let { products, loading, error } = productsState;
     return (
         <Fragment>
             <MetaData title={"Ecommerce"} />

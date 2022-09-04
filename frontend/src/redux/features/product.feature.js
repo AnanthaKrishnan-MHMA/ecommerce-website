@@ -1,18 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const allProductsUrl = "http://192.168.1.105:5000/api/v1/products";
 
 let initialState = {
     products: [],
+    product: {},
     loading: true,
     error: null,
 }
 export const fetchProducts = createAsyncThunk(
-    'products/fetchStatus',
+    'products/fetchData',
     async () => {
-        const response = await axios.get(allProductsUrl);
-        return response.data.products;
+        const {data} = await axios.get("/api/v1/products");
+        return data.products;
+    }
+)
+export const fetchProductDetails = createAsyncThunk(
+    'product/fetchData',
+    async (prodId) => {
+        const { data } = await axios.get(`/api/v1/product/${prodId}`);
+        return data.product;
     }
 )
 
@@ -23,12 +30,21 @@ const productsSlice = createSlice({
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.loading = false;
             state.products = action.payload;
-        }).addCase(fetchProducts.pending, (state, action) => {
+        }).addCase(fetchProducts.pending, (state) => {
             state.loading = true;
-        }).addCase(fetchProducts.rejected, (state, action) => {
+        }).addCase(fetchProducts.rejected, (state) => {
+            state.loading = false;
+            state.error = "oops,something went wrong!, Please try again..."
+        }).addCase(fetchProductDetails.fulfilled, (state, action) => {
+            state.loading = false;
+            state.product = action.payload;
+        }).addCase(fetchProductDetails.pending, (state) => {
+            state.loading = true;
+        }).addCase(fetchProductDetails.rejected, (state) => {
             state.loading = false;
             state.error = "oops,something went wrong!, Please try again..."
         })
     }
 });
+
 export default productsSlice.reducer;

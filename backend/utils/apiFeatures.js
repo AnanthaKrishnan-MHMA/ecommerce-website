@@ -5,7 +5,6 @@ class ApiFeatures {
         this.queryStr = queryStr;
     }
     search() {
-        console.log('starting search..');
 
         let keyword = this.queryStr.keyword ? {
             name: {
@@ -15,12 +14,10 @@ class ApiFeatures {
         } : {}
         this.query = this.query.find({ ...keyword });
         
-        console.log('ending search');
         return this;
     }
 
     filter() {
-        console.log('starting filter');
         // creating copy of query string
         let dupQueryStr = { ...this.queryStr };
         // fields to be removed from query
@@ -34,10 +31,8 @@ class ApiFeatures {
             return `$${key}`;
         });
         dupQueryStr = JSON.parse(dupQueryStr);
-        console.log('..dupQueryStr : ', dupQueryStr);
 
         this.query = this.query.find({ ...dupQueryStr });
-        console.log('ending filter');
         return this;
     }
     pagination(resultPerPage){
