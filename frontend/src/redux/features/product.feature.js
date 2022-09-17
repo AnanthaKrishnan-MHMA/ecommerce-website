@@ -11,7 +11,7 @@ let initialState = {
 export const fetchProducts = createAsyncThunk(
     'products/fetchData',
     async () => {
-        const {data} = await axios.get("/api/v1/products");
+        const { data } = await axios.get("/api/v1/products");
         return data.products;
     }
 )
@@ -26,6 +26,11 @@ export const fetchProductDetails = createAsyncThunk(
 const productsSlice = createSlice({
     name: 'products',
     initialState,
+    reducers: {
+        clearProduct: function (state, action) {
+            state.product = {};
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.loading = false;
@@ -46,5 +51,5 @@ const productsSlice = createSlice({
         })
     }
 });
-
+export const { clearProduct } = productsSlice.actions;
 export default productsSlice.reducer;

@@ -3,10 +3,10 @@ import { CgMouse } from "react-icons/all";
 import Product from "../Product/Product.jsx"
 import MetaData from './MetaData.jsx';
 import './Home.css';
-import ReactLoading from "react-loading"
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../../redux/features/product.feature.js';
+import Loader from '../layout/Loader/Loader.jsx';
 
 function Home() {
     let dispatch = useDispatch();
@@ -17,6 +17,7 @@ function Home() {
     let { products, loading, error } = productsState;
     return (
         <Fragment>
+            <Loader type={"spin"} color={"rgb(115,191,214)"} on={loading}/>
             <MetaData title={"Ecommerce"} />
             <div className="banner">
                 <p>Welcome to Ecommerce</p>
@@ -29,13 +30,12 @@ function Home() {
             </div>
             <h3 className='homeHeading'>Featured Products</h3>
             <div className="container" id='container'>
-                {
-                    loading === true ? <ReactLoading type={"spin"} color={"black"} />
-                        : products.length > 0 ? products.map((prod, k) => {
+                {products.length&&
+                    products.length > 0 ? products.map((prod, k) => {
                             return <Product product={prod} key={k} />
                         })
                             : error ? <p className='container__error'>{error}</p>
-                                : <p>seems like there are no featured products....</p>
+                                : <p>Please make sure your network is connected properly....</p>
                 }
             </div>
         </Fragment>

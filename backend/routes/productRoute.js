@@ -27,10 +27,10 @@ router.route('/admin/product/:id')
 router.route('/product/:id')
     .get(showProduct);
 router.route('/review')
-.post(isAuthenticatedUser, addUserReview);
+    .post(isAuthenticatedUser, addUserReview);
 
 router.route('/reviews')
     .get(showProductReviews)
-    .delete(isAuthenticatedUser,deleteProductReview);
+    .delete(isAuthenticatedUser, deleteProductReview);
 
 module.exports = router;

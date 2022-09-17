@@ -11,7 +11,7 @@ function Header(props) {
                 logo={logo} logoAnimationTime="1"
                 logoWidth="20vmax" logHoverSize="10px" logoHoverColor="white"
                 link1Text="HOME" link2Text="PRODUCTS" link3Text="ABOUT US" link4Text="CONTACT US"
-                link1Url="/" link2Url="/procucts" link3Url="/about" link4Url="/contact"
+                link1Url="/" link2Url="/products" link3Url="/about" link4Url="/contact"
                 link1Size="1.3vmax" link1Color="rgba(21,21,21,0.8)" link1Margin="1.5vmax"
                 link1ColorHover="#246ec9" link1AnimationTime="0"
                 nav1justifyContent="flex-end"

@@ -6,6 +6,7 @@ import ProductDetails from "./components/Product/productDetails/ProductDetails";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect } from "react";
 import webFont from "webfontloader";
+import Products from './components/Products/Products';
 function App() {
   useEffect(() => {
     webFont.load({
@@ -15,12 +16,14 @@ function App() {
     })
   }, []);
   return (
+
     <Router>
       <Header />
-      <Routes>
-        <Route path='/product/:id' element={<ProductDetails />} />
-        <Route path='/' element={<Home />} />
-      </Routes>
+        <Routes>
+          <Route path='/product/:id' element={<ProductDetails />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/products' element={<Products />} />
+        </Routes>
       <Footer />
     </Router>
   );

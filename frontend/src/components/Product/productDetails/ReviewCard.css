@@ -1,0 +1,33 @@
+.reviewCard {
+    width: 100vw;
+    min-width: 50%;
+    max-width: 95%;
+    margin: 1vmax 0;
+    padding: 1vmax;
+    display: flex;
+    border: 1px double rgba(221, 221, 221, 0.8);
+    border-radius: 1vmax 0 0 0;
+}
+
+.reviewCard__block1 {
+    /* width: 30%; */
+    padding-right: 1vmax;
+    border-right: 1px double rgba(221, 221, 221, 0.5);
+}
+
+.reviewCard__block2 {
+    width: 70%;
+    padding: 1vmax;
+}
+
+.reviewCard img {
+    width: 5vmax;
+}
+
+.reviewCard__name {
+    font: 500 1vmax "Roboto";
+}
+
+.reviewCard__comment {
+    font-size: 1.2vmax;
+}

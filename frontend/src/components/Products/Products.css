@@ -1,0 +1,146 @@
+.products {
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
+    max-width: 100%;
+    margin-top: 7vmax;
+    margin-left: 3vmax;
+}
+
+.products__block1 {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    width: 12%;
+}
+
+.products__block1_1 {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 1px solid rgb(231, 233, 235);
+    border-radius: .5vmax;
+    padding: 1vmax;
+    width: 100%;
+    transition: all 1s;
+
+}
+
+.products__block1_1_header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.products__block1_1_options {
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+    transition: max-height 200ms;
+}
+
+/* .products__block1_1:hover .products__block1_1_options,
+.products__block1_1:focus .products__block1_1_options,
+.products__block1_1:focus .products__block1_1_options  */
+.active {
+    opacity: 1;
+    max-height: 10vmax;
+    padding: 1vmax;
+}
+
+.collapse_indicator {
+    background: rgb(47, 47, 47);
+    border: 1px solid rgb(47, 47, 47);
+    width: 1vmax;
+    height: 1vmax;
+    position: relative;
+}
+
+.collapse_indicator span {
+    margin: auto;
+    position: absolute;
+    transition: 300ms;
+    background: white;
+}
+
+.collapse_indicator span:first-child {
+    top: 10%;
+    bottom: 10%;
+    width: 16%;
+    left: 40%;
+}
+
+.collapse_indicator span:last-child {
+    left: 10%;
+    right: 10%;
+    height: 16%;
+    top: 40%;
+}
+
+.products__block1_1:hover .collapse_indicator span:first-child{
+    transform: rotate(90deg);
+}
+
+.products__block1_1:hover .collapse_indicator span:last-child{
+    left: 50%;
+    right: 50%;
+}
+
+.products__block2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 70%;
+    gap: 1vmax;
+}
+
+/* ...................................Responsive............................... */
+@media screen and (min-width:601px) {
+
+    .products__block1_1:hover .products__block1_1_options {
+        opacity: 1;
+        max-height: 10vmax;
+        padding: 1vmax;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .products {
+        flex-direction: column;
+    }
+
+    .products__block1 {
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-height: 1vmax;
+        width: auto;
+    }
+
+    .products__block1_1 {
+        height: fit-content;
+    }
+
+    .products__block1_1_header {}
+
+    .products__block1_1_options {}
+
+    .products__block1_1:hover .products__block1_1_options {}
+
+    .collapse_indicator {
+        visibility: hidden;
+    }
+
+    .collapse_indicator span {}
+
+    .collapse_indicator span:first-child {}
+
+    .collapse_indicator span:last-child {}
+
+    .products__block1_1:hover .collapse_indicator span:first-child {}
+
+    .products__block1_1:hover .collapse_indicator span:last-child {}
+
+    .products__block2 {}
+}
