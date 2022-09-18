@@ -7,7 +7,7 @@ class ApiFeatures {
     search() {
 
         let keyword = this.queryStr.keyword ? {
-            name: {
+            name: { 
                 $regex: this.queryStr.keyword,
                 $options: "i"
             }

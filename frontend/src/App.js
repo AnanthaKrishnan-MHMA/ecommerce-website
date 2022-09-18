@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect } from "react";
 import webFont from "webfontloader";
 import Products from './components/Products/Products';
+import Search from './components/Search/Search';
 function App() {
   useEffect(() => {
     webFont.load({
@@ -23,6 +24,8 @@ function App() {
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<Products />} />
+          <Route path='/products/:keyword' element={<Products />} />
+          <Route path='/search' element={<Search />} />
         </Routes>
       <Footer />
     </Router>
