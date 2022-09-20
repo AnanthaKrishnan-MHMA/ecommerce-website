@@ -15,7 +15,6 @@
 }
 
 .products__block1_1 {
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -29,6 +28,7 @@
 }
 
 .products__block1_1_header {
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
 }
@@ -40,10 +40,13 @@
     overflow: hidden;
     transition: max-height 200ms;
 }
+
 .products__block1_1_options_block {
     display: flex;
     justify-content: space-between;
 }
+
+
 
 
 /* .products__block1_1:hover .products__block1_1_options,
@@ -84,11 +87,11 @@
     top: 40%;
 }
 
-.products__block1_1:hover .collapse_indicator span:first-child{
+.products__block1_1:hover .collapse_indicator span:first-child {
     transform: rotate(90deg);
 }
 
-.products__block1_1:hover .collapse_indicator span:last-child{
+.products__block1_1:hover .collapse_indicator span:last-child {
     left: 50%;
     right: 50%;
 }
@@ -101,6 +104,7 @@
     gap: 1vmax;
 }
 
+
 /* ...................................Responsive............................... */
 @media screen and (min-width:601px) {
 
@@ -112,6 +116,7 @@
 }
 
 @media screen and (max-width:600px) {
+
     .products {
         flex-direction: column;
     }
@@ -120,12 +125,15 @@
         flex-direction: row;
         min-height: 1vmax;
         width: fit-content;
+        flex-wrap: wrap;
     }
 
     .products__block1_1 {
         height: fit-content;
+        width: fit-content;
     }
-/* 
+
+    /* 
     .products__block1_1_header {}
 
     .products__block1_1_options {}
@@ -135,7 +143,8 @@
     .collapse_indicator {
         visibility: hidden;
     }
-/* 
+
+    /* 
     .collapse_indicator span {}
 
     .collapse_indicator span:first-child {}
@@ -144,7 +153,11 @@
 
     .products__block1_1:hover .collapse_indicator span:first-child {}
 
-    .products__block1_1:hover .collapse_indicator span:last-child {}
+    .products__block1_1:hover .collapse_indicator span:last-child {}*/
 
-    .products__block2 {} */
+    .products__block2 {
+        align-self: center;
+        justify-content: space-around;
+    }
+    
 }

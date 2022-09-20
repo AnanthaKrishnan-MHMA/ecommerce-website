@@ -1,0 +1,32 @@
+/* ...................................pagination............................... */
+.pagination {
+    display: flex;
+    text-align: center;
+    width: 20%;
+    margin: 4vmax auto;
+    list-style-type: none;
+}
+
+.pagination li {
+    border: 1px solid #969696;
+    padding: 1vmax;
+    margin: 0.1vmax;
+    border-radius: 0.6vmax;
+    box-shadow: rgb(114 107 255 / 16%) 5px 4px 4px;
+    transition: all 400ms;
+}
+.pagination li a{
+    text-decoration: none;
+    color: #606060;
+}
+.pagination li:hover ,
+.pag__active{
+    background: black;
+    color: white;
+}
+
+@media screen and (max-width:600px) {
+    .pagination {
+        width: fit-content;
+    }
+}

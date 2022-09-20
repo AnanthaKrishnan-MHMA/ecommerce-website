@@ -12,12 +12,13 @@ function Home() {
     let dispatch = useDispatch();
     let productsState = useSelector((state) => state.products);
     useEffect(() => {
-        dispatch(fetchProducts());
+        dispatch(fetchProducts({keyword:"",page:1}));
     }, [dispatch]);
     let { products, loading, error } = productsState;
+
     return (
         <Fragment>
-            <Loader type={"spin"} color={"rgb(115,191,214)"} on={loading}/>
+            <Loader type={"spin"} color={"rgb(115,191,214)"} on={loading} />
             <MetaData title={"Ecommerce"} />
             <div className="banner">
                 <p>Welcome to Ecommerce</p>
@@ -30,12 +31,12 @@ function Home() {
             </div>
             <h3 className='homeHeading'>Featured Products</h3>
             <div className="container" id='container'>
-                {products.length&&
+                {products.length &&
                     products.length > 0 ? products.map((prod, k) => {
-                            return <Product product={prod} key={k} />
-                        })
-                            : error ? <p className='container__error'>{error}</p>
-                                : <p>Please make sure your network is connected properly....</p>
+                        return <Product product={prod} key={k} />
+                    })
+                    : error ? <p className='container__error'>{error}</p>
+                        : <p>Please make sure your network is connected properly....</p>
                 }
             </div>
         </Fragment>

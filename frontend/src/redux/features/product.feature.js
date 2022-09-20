@@ -3,16 +3,19 @@ import axios from "axios";
 
 
 let initialState = {
-    products: [],
+    products: {},
+    resultPerPage: 0,
+    productsCount: 0,
     product: {},
     loading: true,
     error: null,
 }
 export const fetchProducts = createAsyncThunk(
     'products/fetchData',
-    async (keyword) => {
-        const { data } = await axios.get(`/api/v1/products?keyword=${keyword}`);
-        return data.products;
+    async ({keyword="",activePage=1}) => {
+        const { data } = await axios.get(`/api/v1/products?keyword=${keyword}&page=${activePage}`);
+        console.log(`/api/v1/products?keyword=${keyword}&page=${activePage}`);
+        return data;
     }
 )
 export const fetchProductDetails = createAsyncThunk(
@@ -34,7 +37,9 @@ const productsSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.loading = false;
-            state.products = action.payload;
+            state.products = action.payload.products;
+            state.resultPerPage = action.payload.resultPerPage;
+            state.productsCount = action.payload.productsCount;
         }).addCase(fetchProducts.pending, (state) => {
             state.loading = true;
         }).addCase(fetchProducts.rejected, (state) => {

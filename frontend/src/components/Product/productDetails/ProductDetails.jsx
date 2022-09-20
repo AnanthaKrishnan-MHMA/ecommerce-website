@@ -16,13 +16,13 @@ function ProductDetails() {
     let dispatch = useDispatch();
     let productsState = useSelector((state) => state.products);
     let prodId = useParams().id;
-    
-    let { product, loading, error } = productsState;
+
+    let { product, loading } = productsState;
     let { ratings } = product;
     useEffect(() => {
         dispatch(fetchProductDetails(prodId));
         window.scrollTo(0, 0);
-        return ()=>{
+        return () => {
             dispatch(clearProduct());
         }
     }, [dispatch, prodId]);
@@ -57,7 +57,7 @@ function ProductDetails() {
                                 <p className='product_id'>id: #{product._id}</p>
                             </div>
                             <div className="productDetails__right_block1_2">
-                                {ratings >= 0 && 
+                                {ratings >= 0 &&
                                     < ReactStars
                                         count={5} //total number of stars
                                         value={ratings} //input rating value
@@ -79,8 +79,8 @@ function ProductDetails() {
                             : product.stock < 5 ? <p className='instock__hurry'>Hurry up! only {product.stock} left</p>
                                 : <p className='instock'>instock</p>}
                         <h1 className='productPrice'>₹{product.price}.00</h1>
-                        {product.stock>0 &&
-                        <button className='buyNowBtn'>Add to cart</button>}
+                        {product.stock > 0 &&
+                            <button className='buyNowBtn'>Add to cart</button>}
                         <h3>description:</h3>
                         <p>{product.description}</p>
                     </div>
