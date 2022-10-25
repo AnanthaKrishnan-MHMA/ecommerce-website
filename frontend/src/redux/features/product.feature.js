@@ -6,16 +6,22 @@ let initialState = {
     products: {},
     resultPerPage: 0,
     productsCount: 0,
+    filteredProductsCount:0,
     product: {},
     loading: true,
     error: null,
 }
 export const fetchProducts = createAsyncThunk(
     'products/fetchData',
-    async ({keyword="",activePage=1}) => {
-        const { data } = await axios.get(`/api/v1/products?keyword=${keyword}&page=${activePage}`);
-        console.log(`/api/v1/products?keyword=${keyword}&page=${activePage}`);
-        return data;
+    async ({ keyword = "", activePage = 1, price = {minPrice:0, maxPrice:100000}, ratings }) => {
+        console.log(ratings,keyword,activePage,price);
+        let url = `/api/v1/products?keyword=${keyword}&page=${activePage}&price[gte]=${price.minPrice}&price[lte]=${price.maxPrice}`;
+        if(ratings){
+            url = `/api/v1/products?keyword=${keyword}&page=${activePage}&price[gte]=${price.minPrice}&price[lte]=${price.maxPrice}&ratings[gt]=${ratings}`;
+        }
+        const { data } = await axios.get(url);
+        console.log(url);
+        return data; 
     }
 )
 export const fetchProductDetails = createAsyncThunk(
@@ -40,6 +46,7 @@ const productsSlice = createSlice({
             state.products = action.payload.products;
             state.resultPerPage = action.payload.resultPerPage;
             state.productsCount = action.payload.productsCount;
+            state.filteredProductsCount = action.payload.filteredProductsCount;
         }).addCase(fetchProducts.pending, (state) => {
             state.loading = true;
         }).addCase(fetchProducts.rejected, (state) => {

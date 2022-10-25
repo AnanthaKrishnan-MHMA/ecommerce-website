@@ -1,19 +1,18 @@
 
 class ApiFeatures {
     constructor(query, queryStr) {
-        this.query = query;
-        this.queryStr = queryStr;
+        this.query = query; //Product.find()
+        this.queryStr = queryStr; //req.query
     }
     search() {
 
-        let keyword = this.queryStr.keyword ? {
+        let keyword = this.queryStr.keyword ? {         //if a "hp" is passed to req.query.keyword
             name: { 
-                $regex: this.queryStr.keyword,
+                $regex: this.queryStr.keyword,          //keyword = {{name:"hp"}}
                 $options: "i"
             }
-        } : {}
-        this.query = this.query.find({ ...keyword });
-        
+        } : {}                                          //else keyword = {}
+        this.query = this.query.find({ ...keyword });   //query = Product.find().find({name:"hp"})
         return this;
     }
 

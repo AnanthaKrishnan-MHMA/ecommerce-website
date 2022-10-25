@@ -1,7 +1,7 @@
 .loader {
     width: 100vw;
     height: 100vh;
-    background: rgb(255, 255, 255);
+    /* background: rgb(255, 255, 255); */
     margin: auto;
     z-index: 1;
     position: fixed;

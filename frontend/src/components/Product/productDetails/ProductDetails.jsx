@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { clearProduct, fetchProductDetails } from "../../../redux/features/product.feature";
 import { Carousel } from "react-responsive-carousel";
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import ReactStars from 'react-rating-stars-component';
+import Rating from "@mui/material/Rating";
 import "./ProductDetails.css"
 import { useState } from 'react';
 import ReviewCard from "./ReviewCard.jsx"
@@ -58,14 +58,12 @@ function ProductDetails() {
                             </div>
                             <div className="productDetails__right_block1_2">
                                 {ratings >= 0 &&
-                                    < ReactStars
-                                        count={5} //total number of stars
-                                        value={ratings} //input rating value
-                                        edit={false}
-                                        size={window.innerWidth < 600 ? 17 : 18}
-                                        isHalf={true}
-                                        activeColor="tomato"
-                                    />}
+
+                                    <Rating name="product-ratings"
+                                        value={product.ratings}
+                                        defaultValue={0} precision={0.5}
+                                        style={{ color: "tomato" }}
+                                        readOnly />}
                                 <span>({product.numOfReviews} ratings)</span>
                             </div>
                         </div>
@@ -86,9 +84,12 @@ function ProductDetails() {
                     </div>
                 </div>
                 <div className="productDetails__bottom">
-                    {product.reviews && product.reviews.map((review, k) => (
+                    <h2 className='productDetails__bottom_reviews_header'>Reviews</h2>
+                    {product.reviews?.length > 0 ? product.reviews.map((review, k) => (
                         <ReviewCard name={review.name} rating={review.rating} comment={review.comment} key={k} />
-                    ))}
+                    )) : <div className='alert-notice'>
+                        <p>No reviews yet.</p>
+                    </div>}
                 </div>
             </div>
         </Fragment>

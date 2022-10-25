@@ -90,7 +90,13 @@
     min-width: 50vw;
     min-height: 50vh;
 }
-
+.productDetails__bottom_reviews_header{
+    text-align: center;
+    border-bottom: 1px solid rgb(100, 100, 100);
+    padding: 1vmax;
+    width: fit-content;
+    margin: 0 auto;
+}
 
 
 .instock,
@@ -110,6 +116,21 @@
 .outofstock {
     color: red;
 }
+
+.alert-notice{
+    margin: 2vmax auto;
+    padding:2vmax;
+    background:  #eed20261;
+    border: 1px solid  #eed202;
+    border-radius: 1vmax;
+    min-height: 5vmax;
+    min-width: 5vmax;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 @media screen and (max-width:600px){
     .productDetails {

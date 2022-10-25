@@ -2,7 +2,7 @@ const Product = require('../models/product.model');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncError = require('../middleware/catchAsyncError');
 const ApiFeatures = require('../utils/apiFeatures');
-
+const _ = require('lodash');
 // show all products
 exports.createProduct = catchAsyncError(async (req, res) => {
 
@@ -17,18 +17,25 @@ exports.createProduct = catchAsyncError(async (req, res) => {
 // create new product
 exports.showAllProducts = catchAsyncError(async (req, res) => {
 
-    let resultPerPage = 6;
+    let resultPerPage = 8;
     let productsCount = await Product.countDocuments();
-    let apiFeatures = new ApiFeatures(Product.find(), req.query)
-        .search()
-        .filter()
-        .pagination(resultPerPage);
-    let products = await apiFeatures.query;
+    const apiFeature = new ApiFeatures(Product.find(), req.query)
+    .search()
+    .filter();
+
+  let products = await apiFeature.query.clone();
+
+  let filteredProductsCount = products.length;
+
+  apiFeature.pagination(resultPerPage);
+
+  products = await apiFeature.query;
 
     res.status(200).json({
         success: true,
         productsCount,
         resultPerPage,
+        filteredProductsCount,
         products,
     });
 });
@@ -155,18 +162,18 @@ exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
         totalRatings += rev.rating;
     });
     const ratings = totalRatings / numOfReviews;
-    product = await Product.findByIdAndUpdate(req.query.id,{
-        reviews : filtredReviews,
+    product = await Product.findByIdAndUpdate(req.query.id, {
+        reviews: filtredReviews,
         ratings,
         numOfReviews
-    },{
-        new:true,
-        runValidators:true,
-        useFindAndModify:false
+    }, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
     });
     res.status(200).json({
         success: true,
-        message:"review deleted successfully",
+        message: "review deleted successfully",
         product
 
     });

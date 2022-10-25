@@ -18,10 +18,8 @@ function Search() {
     return (
         <Fragment>
             <form className='searchBox' onSubmit={onSubmitHandler}>
-                <div>
-                    <input type="text" placeholder='search product ...' onChange={(e) => { setKeyword(e.target.value) }} />
+                    <input type="search" placeholder='search product ...' onChange={(e) => { setKeyword(e.target.value) }} />
                     <input type="submit" value="Search" />
-                </div>
             </form>
         </Fragment>
     );

@@ -1,0 +1,53 @@
+input:focus {
+    outline: none;
+}
+.full-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3vmax;
+}
+.searchBox {
+    height: 5vmax;
+}
+
+.searchBox input[type="search"],
+.searchBox input[type="submit"] {
+    height: 100%;
+    font-size: 1.2vmax;
+}
+
+.searchBox input[type="search"] {
+    width: 70%;
+    padding-left: 1.5vmax;
+    border-radius: 1vmax 0 0 1vmax;
+    border: 1px solid grey;
+}
+
+.searchBox input[type="submit"] {
+    width: 30%;
+    border: transparent;
+    background: rgb(249,130,46);
+    color: white;
+    border-radius: 0 1vmax 1vmax 0;
+}
+
+.searchBox div input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+.ecom-logo img{
+    width: 8vmax;
+}
+
+@media screen and (max-width:600px) {
+    /* .full-header{
+        position: fixed;
+        top: 0;
+        left: 15%;
+        display: flex;
+        align-items: center;
+        gap: 3vmax;
+        z-index: 10;
+    } */
+}

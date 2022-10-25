@@ -4,6 +4,7 @@
     justify-content: flex-start;
     text-decoration: none;
     width: 14vmax;
+    height: fit-content;
     color: rgb(48, 48, 48);
     margin: 2vmax;
     transition: all 0.5s;
@@ -16,14 +17,13 @@
 
 .productCard__title {
     font: 100 1vmax "Roboto";
-    margin-left: 1vmax;
-    margin-bottom: 0;
+    margin: 1.5vmax 0 0 1vmax;
 }
 
 .productCard__price {
     color: tomato;
     font: 600 1vmax "Roboto";
-    margin-left: 1vmax;
+    margin: 1.5vmax 0 1vmax 1vmax;
 }
 
 .productCard__price::after {
@@ -31,13 +31,13 @@
 }
 
 .productCard div {
-    margin: 0.2vmax;
+    margin: 1.5vmax 0 1vmax 1vmax;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-.productCard div span {
+.productCard__numOfReviews {
     margin: 0.2vmax;
     font: 300 0.7vmax "Roboto";
 }

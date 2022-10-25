@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import webFont from "webfontloader";
 import Products from './components/Products/Products';
 import Search from './components/Search/Search';
+import FullHeader from './components/layout/Header/FullHeader';
 function App() {
   useEffect(() => {
     webFont.load({
@@ -20,6 +21,7 @@ function App() {
 
     <Router>
       <Header />
+      <FullHeader/>
         <Routes>
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/' element={<Home />} />

@@ -2,8 +2,9 @@
     display: flex;
     justify-content: space-between;
     width: 90vw;
+    min-height: 80vh;
     max-width: 100%;
-    margin-top: 7vmax;
+    margin-top: 0;
     margin-left: 3vmax;
 }
 
@@ -14,7 +15,7 @@
     width: 12%;
 }
 
-.products__block1_1 {
+/* .products__block1_1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -25,33 +26,20 @@
     width: 100%;
     transition: all 1s;
 
-}
+} */
 
-.products__block1_1_header {
-    cursor: pointer;
+/* FILTER BASIC
+.filter_basic {}
+
+.filter_basic_price {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
-.products__block1_1_options {
-    opacity: 0;
-    max-height: 0;
-    padding: 0;
-    overflow: hidden;
-    transition: max-height 200ms;
-}
+.filter_basic_price label {}
 
-.products__block1_1_options_block {
-    display: flex;
-    justify-content: space-between;
-}
+.filter_basic_price select {}
 
-
-
-
-/* .products__block1_1:hover .products__block1_1_options,
-.products__block1_1:focus .products__block1_1_options,
-.products__block1_1:focus .products__block1_1_options  */
 .active {
     opacity: 1;
     max-height: 10vmax;
@@ -94,7 +82,7 @@
 .products__block1_1:hover .collapse_indicator span:last-child {
     left: 50%;
     right: 50%;
-}
+}*/
 
 .products__block2 {
     display: flex;
@@ -102,23 +90,16 @@
     justify-content: flex-start;
     width: 70%;
     gap: 1vmax;
-}
+} 
 
 
 /* ...................................Responsive............................... */
-@media screen and (min-width:601px) {
-
-    .products__block1_1:hover .products__block1_1_options {
-        opacity: 1;
-        max-height: 10vmax;
-        padding: 1vmax;
-    }
-}
 
 @media screen and (max-width:600px) {
 
     .products {
         flex-direction: column;
+        justify-content: flex-start;
     }
 
     .products__block1 {
@@ -126,11 +107,6 @@
         min-height: 1vmax;
         width: fit-content;
         flex-wrap: wrap;
-    }
-
-    .products__block1_1 {
-        height: fit-content;
-        width: fit-content;
     }
 
     /* 
@@ -159,5 +135,5 @@
         align-self: center;
         justify-content: space-around;
     }
-    
+
 }
