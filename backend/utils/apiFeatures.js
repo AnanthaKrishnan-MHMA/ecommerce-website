@@ -11,8 +11,22 @@ class ApiFeatures {
                 $regex: this.queryStr.keyword,          //keyword = {{name:"hp"}}
                 $options: "i"
             }
-        } : {}                                          //else keyword = {}
-        this.query = this.query.find({ ...keyword });   //query = Product.find().find({name:"hp"})
+        } : {}
+        let category = this.queryStr.category ?{
+            category:{
+                $regex: this.queryStr.category,          //keyword = {{name:"hp"}}
+                $options: "i"
+            }
+        }:{} 
+        let brand = this.queryStr.brand ?{
+            brand:{
+                $regex: this.queryStr.brand,          //keyword = {{name:"hp"}}
+                $options: "i"
+            }
+        }:{} 
+        let finalQuery = {...keyword,...category,...brand};
+        console.log(finalQuery)                                      //else keyword = {}
+        this.query = this.query.find({ ...finalQuery });   //query = Product.find().find({name:"hp"})
         return this;
     }
 
@@ -20,7 +34,7 @@ class ApiFeatures {
         // creating copy of query string
         let dupQueryStr = { ...this.queryStr };
         // fields to be removed from query
-        const removeFields = ["keyword", "page", "limit"];
+        const removeFields = ["keyword","category", "brand", "page", "limit"]; //note: category experimetay added
         // removing terms from copy fo query string
         removeFields.forEach(key => delete dupQueryStr[key]);
 

@@ -2,136 +2,128 @@ import React from 'react';
 import { useRef } from 'react';
 import './FilterBasic.css'
 
-
-function FilterBasic({ onPriceChange }) {
+function FilterBasic({ onPriceChange, onCategoryChange, onBrandChange }) {
     let minPrice = useRef(0);
     let maxPrice = useRef(1000000);
     let filterDisplay = useRef();
-    let sortButton = useRef();
-    let filterDisplayElements = useRef([]);
-    const handlePriceChange = (checked, priceRange) => {
-        // have to create a functionality for multiple cbox selected
-        if (checked) {
+
+    const handlePriceChange = (e, priceRange) => {
+        cbOnlyOneActive(e.target)
+
+        if (e.target.checked) {
             onPriceChange(priceRange);
         } else {
             onPriceChange({ minPrice: 0, maxPrice: 100000 })
         }
     }
-    const buttonApplyClicked = () => {
-        let priceRange = { minPrice: Number(minPrice.current.value), maxPrice: Number(maxPrice.current.value) }
-        onPriceChange(priceRange);
+
+    const handleCategoryChange = (e, queryStr) => {
+        cbOnlyOneActive(e.target)
+        if (e.target.checked) {
+            onCategoryChange(queryStr);
+        } else {
+            onCategoryChange("");
+        }
     }
-    const enableFilter = () => {
-        filterDisplay.current.classList.toggle("active");
+    const handleBrandChange = (e, queryStr) => {
+
+        if (e.target.checked) {
+            onBrandChange(queryStr);
+        } else {
+            onBrandChange("");
+        }
     }
-    const enableSort = () => {
+
+    const onClickSubmit = (e) => {
+        e.preventDefault();
+
+        const minPriceNum = Number(minPrice.current.value);
+        const maxPriceNum = Number(maxPrice.current.value);
+        if (minPriceNum >= 0 &&
+            minPriceNum < maxPriceNum) {
+                // deselecting already selected price range if any.
+                let group = document.getElementsByClassName("checkbox-price");
+                [].forEach.call(group,(el)=>{
+                    el.checked = false;
+                });
+            onPriceChange(
+                {
+                    minPrice: minPrice.current.value,
+                    maxPrice: maxPrice.current.value
+                }
+            );
+        }
 
     }
-    const showDisplayElements = (ei) => {
-        for (let i = 0; i < filterDisplayElements.current.length; i++) {
-            if(i===ei){
-                filterDisplayElements.current[i].classList.remove("inactive");
-            }else{
-                filterDisplayElements.current[i].classList.add("inactive");
+    // To restrict selection of group of checkbox to only one at a time
+    const cbOnlyOneActive = (target) => {
+        const arr = document.getElementsByClassName(target.className);
+
+        for (let el of arr) {
+            if (target !== el) {
+                el.checked = false;
             }
         }
     }
+
     return (
         <div className="filter_basic">
             <div ref={filterDisplay} className="filter_basic_main">
-                <div ref={el => filterDisplayElements.current[0] = el} className="filter_basic_display">
+                {/* price */}
+                <div className="filter_basic_main_category">
 
-                    <h4 className='filter_basic_display_header'>Price</h4>
-                    <div className='filter_basic_display_options'>
-                        <input type="checkbox" name="price-range" id="under-rs500"
-                            onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 0, maxPrice: 500 })} />
-                        <label htmlFor="under-rs500">Under Rs.500</label>
-                    </div>
-                    <div className='filter_basic_display_options'>
-                        <input type="checkbox" name="price-range" id="rs500-rs1000"
-                            onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 500, maxPrice: 1000 })} />
-                        <label htmlFor="rs500-rs1000">Rs.500-1000</label>
-                    </div>
-                    <div className='filter_basic_display_options'>
-                        <input type="checkbox" name="price-range" id="rs1000-rs2500"
-                            onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 1000, maxPrice: 2500 })} />
-                        <label htmlFor="rs1000-rs2500">Rs.1000-2500</label>
-                    </div>
-                    <div className='filter_basic_display_options'>
-                        <input type="checkbox" name="price-range" id="rs2500-rs5000"
-                            onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 2500, maxPrice: 5000 })} />
-                        <label htmlFor="rs2500-rs5000">Rs.2500-5000</label>
-                    </div>
-                    <div className='filter_basic_display_options'>
-                        <input type="checkbox" name="price-range" id="rs5000+"
-                            onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 5000, maxPrice: 1000000 })} />
-                        <label htmlFor="rs5000+">Rs.5000+</label>
-                    </div>
+                    <ul>
+                        <li><strong>Price</strong></li>
+                        <li><input className="checkbox-price" type="checkbox" onChange={(e) => handlePriceChange(e, { minPrice: 0, maxPrice: 500 })} /><label>Below Rs.500</label></li>
+                        <li><input className="checkbox-price" type="checkbox" onChange={(e) => handlePriceChange(e, { minPrice: 500, maxPrice: 1000 })} /><label>Rs.500-1000</label></li>
+                        <li><input className="checkbox-price" type="checkbox" onChange={(e) => handlePriceChange(e, { minPrice: 1000, maxPrice: 2000 })} /><label>Rs.1000-2000</label></li>
+                        <li><input className="checkbox-price" type="checkbox" onChange={(e) => handlePriceChange(e, { minPrice: 2000, maxPrice: 5000 })} /><label>Rs.2000-5000</label></li>
+                        <li><input className="checkbox-price" type="checkbox" onChange={(e) => handlePriceChange(e, { minPrice: 5000, maxPrice: 1000000 })} /><label>Rs.5000+</label></li>
+                    </ul>
+                    <form>
+                        <label htmlFor="minPrice">min</label>
+                        <input type="number" name='minPrice' ref={minPrice} required />
 
-                    <div className='filter_basic_display_minmax'>
-                        <label htmlFor="minPrice">Min</label>
-                        <input type="number" name="minPrice" placeholder='min' ref={minPrice} />
-                        <label htmlFor="maxPrice">Max</label>
-                        <input type="number" name="maxPrice" placeholder='max' ref={maxPrice} />
-                    </div>
+                        <label htmlFor="maxPrice">max</label>
+                        <input type="number" name='maxPrice' ref={maxPrice} required />
 
-                    <div className='filter_basic_display_applybutton'>
-                        <button className='price-apply-button' onClick={buttonApplyClicked}>apply</button>
-                    </div>
+                        <input type="submit" value="apply"
+                            onClick={onClickSubmit} />
+                    </form>
                 </div>
-                <div ref={el => filterDisplayElements.current[1] = el} className="filter_basic_display inactive">
-                    <h1>category display</h1>
-                    {/* 
-                <h4>Price</h4>
-                <div>
-                    <input type="checkbox" name="price-range" id="under-rs500"
-                        onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 0, maxPrice: 500 })} />
-                    <label htmlFor="under-rs500">Under Rs.500</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="price-range" id="rs500-rs1000"
-                        onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 500, maxPrice: 1000 })} />
-                    <label htmlFor="rs500-rs1000">Rs.500-1000</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="price-range" id="rs1000-rs2500"
-                        onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 1000, maxPrice: 2500 })} />
-                    <label htmlFor="rs1000-rs2500">Rs.1000-2500</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="price-range" id="rs2500-rs5000"
-                        onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 2500, maxPrice: 5000 })} />
-                    <label htmlFor="rs2500-rs5000">Rs.2500-5000</label>
-                </div>
-                <div>
-                    <input type="checkbox" name="price-range" id="rs5000+"
-                        onChange={(e) => handlePriceChange(e.target.checked, { minPrice: 5000, maxPrice: 1000000 })} />
-                    <label htmlFor="rs5000+">Rs.5000+</label>
-                </div>
+                {/* category */}
+                <div className="filter_basic_main_category">
+                    <ul>
 
-                <div>
-                    <label htmlFor="minPrice">Min</label>
-                    <input type="number" name="minPrice" placeholder='min' ref={minPrice} />
+                        <li><strong>category</strong></li>
+                        <li><input className="checkbox-category" type="checkbox" onChange={(e) => handleCategoryChange(e, "toys")} /><label>Toys</label></li>
+                        <li><input className="checkbox-category" type="checkbox" onChange={(e) => handleCategoryChange(e, "fashion")} /><label>Fashion</label></li>
+                        <li><input className="checkbox-category" type="checkbox" onChange={(e) => handleCategoryChange(e, "furniture")} /><label>Furniture</label></li>
+                        <li><input className="checkbox-category" type="checkbox" onChange={(e) => handleCategoryChange(e, "home appliances")} /><label>Home Appliances</label></li>
+                        <li><input className="checkbox-category" type="checkbox" onChange={(e) => handleCategoryChange(e, "electronics")} /><label>Electronics</label></li>
+                    </ul>
                 </div>
-                <div>
-                    <label htmlFor="maxPrice">Max</label>
-                    <input type="number" name="maxPrice" placeholder='max' ref={maxPrice} />
+                {/* brand */}
+                <div className="filter_basic_main_category">
+                    <ul>
+                        <li><strong>Brand</strong></li>
+                        <li><input className="checkbox-brand" type="checkbox" onChange={(e) => handleBrandChange(e, "nike")} /><label>Nike</label></li>
+                        <li><input className="checkbox-brand" type="checkbox" onChange={(e) => handleBrandChange(e, "addidas")} /><label>Addidas</label></li>
+                        <li><input className="checkbox-brand" type="checkbox" onChange={(e) => handleBrandChange(e, "nivia")} /><label>Nivia</label></li>
+                        <li><input className="checkbox-brand" type="checkbox" onChange={(e) => handleBrandChange(e, "roadster")} /><label>Roadster</label></li>
+                    </ul>
                 </div>
-                <div>
-                    <button className='price-apply-button' onClick={buttonApplyClicked}>apply</button>
-                </div> */}
-                </div>
-                <div className="filter_basic_options">
-                    <h4>Filters</h4>
-                    <button onClick={()=>showDisplayElements(0)}>Price</button>
-                    <button onClick={()=>showDisplayElements(1)}>Category</button>
+                {/* brand dupe*/}
+                <div className="filter_basic_main_category">
+                    <ul>
+                        <li><strong>Brand</strong></li>
+                        <li><input type="checkbox" onChange={(e) => handleBrandChange(e.target.checked, "nike")} /><label>Nike</label></li>
+                        <li><input type="checkbox" onChange={(e) => handleBrandChange(e.target.checked, "addidas")} /><label>Addidas</label></li>
+                        <li><input type="checkbox" onChange={(e) => handleBrandChange(e.target.checked, "nivia")} /><label>Nivia</label></li>
+                        <li><input type="checkbox" onChange={(e) => handleBrandChange(e.target.checked, "roadster")} /><label>Roadster</label></li>
+                    </ul>
                 </div>
             </div>
-            <div className="filter_basic_collapsed">
-                <button onClick={enableSort}>sort by</button>
-                <button onClick={enableFilter}>Filters</button>
-            </div>
-
         </div>
     );
 }

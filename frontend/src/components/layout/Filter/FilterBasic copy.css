@@ -1,14 +1,90 @@
 /* FILTER BASIC */
 .filter_basic {
-    position: fixed;
+    position: absolute;
     bottom: 0%;
     left: 0%;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter_basic_main {
+    display: flex;
+    justify-content: space-between;
+    background: #ffffff;
+    position: fixed;
+    bottom: -100vmax;
+    left: 0;
+    width: 100vw;
+    max-width: 100%;
+    height: 82vh;
+    transition: all 1.2s ease-in;
+}
+
+.filter_basic_display {
+    border: 2px solid rgb(53 26 72);
+    border-right: none;
+    width: 70%;
+}
+.filter_basic_display_header{
+    background: rgb(53 26 72);
+    color: #ffffff;
+    padding: 2vmax;
+}
+.filter_basic_display div{
+    padding-top: 2vmax;
+    padding-left: 4vmax;
+}
+.filter_basic_display_options > label{
+    padding-left: 1vmax;
+}
+
+
+.filter_basic_display_minmax{
+    display: flex;
+}
+.filter_basic_display_minmax > input{
+    width: 40%;
+    margin: 0 1vmax;
+}
+
+
+.filter_basic_options {
+    background: #d1d1d1;
+    border: 2px solid rgb(53 26 72);
+    border-left: none;
+    width: 30%;
+}
+.filter_basic_options > h4{
+    background: rgb(53 26 72);
+    color: #ffffff;
+    padding: 2vmax;
+}
+.filter_basic_options > button{
+    text-align: left;
+    width: 70%;
+    font-size: 2.1vmax;
+    margin: 0.3vmax 0;
+    padding: 1vmax;
+    border: none;
+    background: #ffffff;
+}
+
+.price-apply-button {
+    width: fit-content;
+    height: 4vmax;
+    min-height: fit-content;
+    border: none;
+    background: rgb(249, 130, 46);
+    color: white;
 }
 
 .filter_basic_collapsed {
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100vw;
     max-width: 100%;
 }
@@ -22,38 +98,22 @@
     font-size: 2.1vmax;
 }
 
-.filter_basic_price {
-    position: relative;
-    background: #ffffff;
-    border: 3px solid rgb(53 26 72);
-    padding: 3vmax;
-    bottom:-100vh;
-    transition: all 1s ease-in-out;
-    z-index: 2;
+.inactive {
+    display: none;
 }
-.filter_basic_price > h4{
-    margin: 1vmax 0;
-}
-.filter_basic_price > div{
-    padding: 1vmax;
-}
-.price-apply-button{
-    width: fit-content;
-    height: 4vmax;
-    min-height: fit-content;
-    border: none;
-    background: rgb(249,130,46);
-    color: white;
-}
+
 .active {
-    bottom: 0vh;
+    bottom: 6vmax;
 }
-
-.filter_basic_price h5 {}
-
-.filter_basic_price label {}
 
 .filter_basic_price input[type="number"] {
     width: 20%;
     height: 3.1vmax;
+}
+
+@media screen and (min-width:601px) {
+    .filter_basic_collapsed {
+        display: none;
+    }
+    
 }

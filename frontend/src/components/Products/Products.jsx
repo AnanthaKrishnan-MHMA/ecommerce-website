@@ -15,10 +15,12 @@ function Products() {
     let productState = useSelector(state => state.products);
     const [activePage, setActivePage] = useState(page);
     const [price, setPrice] = useState({ minPrice: 0, maxPrice: 100000 });
+    const [category, setCategory] = useState("");
+    const [brand, setBrand] = useState("");
     useEffect(() => {
-        dispatch(fetchProducts({ keyword, activePage, price }));
+        dispatch(fetchProducts({ keyword, activePage, price, category, brand }));
         window.scroll(0, 0);
-    }, [dispatch, keyword, activePage, price]);
+    }, [dispatch, keyword, activePage, price, category, brand]);
     let { products, loading, resultPerPage, filteredProductsCount, productsCount } = productState;
 
     const handlePageChange = (e) => {
@@ -27,6 +29,12 @@ function Products() {
     const onPriceChange = (newPrice) => {
         setPrice(newPrice)
     };
+    const onCategoryChange = (newCat) => {
+        setCategory(newCat)
+    };
+    const onBrandChange = (newCat) => {
+        setBrand(newCat)
+    };
 
     return (
         <Fragment>
@@ -34,9 +42,13 @@ function Products() {
                 <Loader type={"spin"} color={"rgb(115,191,214)"} on={loading} />
 
                 <div className="products__block1">
-                    <FilterBasic onPriceChange={onPriceChange} />
+                    <FilterBasic
+                        onPriceChange={onPriceChange}
+                        onCategoryChange={onCategoryChange}
+                        onBrandChange = {onBrandChange}
+                    />
                 </div>
-                
+
                 <div className="products__block2">
                     {products.length > 0 &&
                         products.map((prod, k) => <Product product={prod} key={k} />)}

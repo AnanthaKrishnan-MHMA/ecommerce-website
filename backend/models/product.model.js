@@ -28,6 +28,10 @@ const productSchema = new Schema({
         type: Number,
         default: 0
     },
+    brand:{
+        type:String,
+        required: [true, "please enter product brand name"]
+    },
     images: [
         {
             public_id: {

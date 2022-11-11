@@ -12,8 +12,9 @@
     min-height: 50vh;
     display: flex;
     flex-direction: column;
-    width: 12%;
+    width: 22%;
 }
+
 
 /* .products__block1_1 {
     display: flex;
@@ -30,7 +31,6 @@
 
 /* FILTER BASIC
 .filter_basic {}
-
 .filter_basic_price {
     display: flex;
     flex-direction: column;

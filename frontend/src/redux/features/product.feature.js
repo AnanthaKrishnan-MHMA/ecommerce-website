@@ -6,22 +6,22 @@ let initialState = {
     products: {},
     resultPerPage: 0,
     productsCount: 0,
-    filteredProductsCount:0,
+    filteredProductsCount: 0,
     product: {},
     loading: true,
     error: null,
 }
 export const fetchProducts = createAsyncThunk(
     'products/fetchData',
-    async ({ keyword = "", activePage = 1, price = {minPrice:0, maxPrice:100000}, ratings }) => {
-        console.log(ratings,keyword,activePage,price);
-        let url = `/api/v1/products?keyword=${keyword}&page=${activePage}&price[gte]=${price.minPrice}&price[lte]=${price.maxPrice}`;
-        if(ratings){
+    async ({ keyword = "hp", activePage = 1, price = { minPrice: 0, maxPrice: 100000 }, ratings, category = "", brand = "" }) => {
+        console.log(ratings, keyword, activePage, price, category);
+        let url = `/api/v1/products?keyword=${keyword}&page=${activePage}&price[gte]=${price.minPrice}&price[lte]=${price.maxPrice}&category=${category}&brand=${brand}`;
+        if (ratings) {
             url = `/api/v1/products?keyword=${keyword}&page=${activePage}&price[gte]=${price.minPrice}&price[lte]=${price.maxPrice}&ratings[gt]=${ratings}`;
         }
         const { data } = await axios.get(url);
         console.log(url);
-        return data; 
+        return data;
     }
 )
 export const fetchProductDetails = createAsyncThunk(
