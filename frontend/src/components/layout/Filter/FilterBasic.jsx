@@ -25,13 +25,16 @@ function FilterBasic({ onPriceChange, onCategoryChange, onBrandChange }) {
             onCategoryChange("");
         }
     }
-    const handleBrandChange = (e, queryStr) => {
+    const handleBrandChange = (e) => {
 
-        if (e.target.checked) {
-            onBrandChange(queryStr);
-        } else {
-            onBrandChange("");
-        }
+            let arr = document.getElementsByClassName(e.target.className);
+            let brandQuery = [];
+            [].forEach.call(arr, (el) => {
+                if(el.checked){
+                    brandQuery.push(el.value);
+                }
+            })
+            onBrandChange(brandQuery.join("|"));
     }
 
     const onClickSubmit = (e) => {
@@ -41,11 +44,11 @@ function FilterBasic({ onPriceChange, onCategoryChange, onBrandChange }) {
         const maxPriceNum = Number(maxPrice.current.value);
         if (minPriceNum >= 0 &&
             minPriceNum < maxPriceNum) {
-                // deselecting already selected price range if any.
-                let group = document.getElementsByClassName("checkbox-price");
-                [].forEach.call(group,(el)=>{
-                    el.checked = false;
-                });
+            // deselecting already selected price range if any.
+            let group = document.getElementsByClassName("checkbox-price");
+            [].forEach.call(group, (el) => {
+                el.checked = false;
+            });
             onPriceChange(
                 {
                     minPrice: minPrice.current.value,
@@ -107,10 +110,12 @@ function FilterBasic({ onPriceChange, onCategoryChange, onBrandChange }) {
                 <div className="filter_basic_main_category">
                     <ul>
                         <li><strong>Brand</strong></li>
-                        <li><input className="checkbox-brand" type="checkbox" onChange={(e) => handleBrandChange(e, "nike")} /><label>Nike</label></li>
-                        <li><input className="checkbox-brand" type="checkbox" onChange={(e) => handleBrandChange(e, "addidas")} /><label>Addidas</label></li>
-                        <li><input className="checkbox-brand" type="checkbox" onChange={(e) => handleBrandChange(e, "nivia")} /><label>Nivia</label></li>
-                        <li><input className="checkbox-brand" type="checkbox" onChange={(e) => handleBrandChange(e, "roadster")} /><label>Roadster</label></li>
+                        <li><input className="checkbox-brand" value="nike" type="checkbox" onChange={(e) => handleBrandChange(e)} /><label>Nike</label></li>
+                        <li><input className="checkbox-brand" value="addidas" type="checkbox" onChange={(e) => handleBrandChange(e)} /><label>Addidas</label></li>
+                        <li><input className="checkbox-brand" value="nivia" type="checkbox" onChange={(e) => handleBrandChange(e)} /><label>Nivia</label></li>
+                        <li><input className="checkbox-brand" value="roadster" type="checkbox" onChange={(e) => handleBrandChange(e)} /><label>Roadster</label></li>
+                        <li><input className="checkbox-brand" value="lambo" type="checkbox" onChange={(e) => handleBrandChange(e)} /><label>Lambo</label></li>
+                        <li><input className="checkbox-brand" value="mambo" type="checkbox" onChange={(e) => handleBrandChange(e)} /><label>Mambo</label></li>
                     </ul>
                 </div>
                 {/* brand dupe*/}

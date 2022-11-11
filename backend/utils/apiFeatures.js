@@ -14,13 +14,15 @@ class ApiFeatures {
         } : {}
         let category = this.queryStr.category ?{
             category:{
-                $regex: this.queryStr.category,          //keyword = {{name:"hp"}}
+                $regex: this.queryStr.category,          
                 $options: "i"
             }
         }:{} 
+
         let brand = this.queryStr.brand ?{
+            // **************Working here*****************
             brand:{
-                $regex: this.queryStr.brand,          //keyword = {{name:"hp"}}
+                $regex:this.queryStr.brand,          
                 $options: "i"
             }
         }:{} 
